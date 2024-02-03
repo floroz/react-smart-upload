@@ -2,3 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Create a facade between the components and the application, where Tailwind is only used directly within the application, but not the components (which may be used in other applications or shipped as standalone libraries) 
+  This is not a Production Ready setup, but a way to simulate a Component Library coming from a different source than the Application source code.
+  */
+  --color-blue-300: theme(colors.blue.300);
+  --color-blue-500: theme(colors.blue.500);
+  --color-blue-700: theme(colors.blue.700);
+  --color-white: theme(colors.white);
+  --color-black: theme(colors.black);
+  --a11y-outline: 2px solid var(--color-blue-500);
+  --a11y-outline-offset: 2px;
+}
+
+.with-focus:focus-visible {
+  outline: var(--a11y-outline);
+  outline-offset: var(--a11y-outline-offset);
+}

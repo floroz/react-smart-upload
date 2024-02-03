@@ -1,27 +1,34 @@
-# Task Boilerplate
+# React Smart Upload
 
-This is a simple boilerplate for the task. You are free to use it and modify it to your needs.
+## Prerequisite
 
-## Installation
+- Make sure you have Node >= 18
+- Install dependencies: `npm i`
 
-```bash
-npm install
-npm run dev
-```
+## Component Library
 
-This will start a simple dev server with hot reload using vite and express for some mock API requests.
+Start Storybook to review the Components:
 
-No testing framework is provided by default. Use whatever you like and are familiar with.
+- `npm run storybook`
 
-## API
+## Application (Frontend and Backend)
 
-You find the express js api under src/server. A simple file upload API is provided. You can use it and/or modify it to your needs.
+Start the application:
 
-API Routes
-- POST /api/upload (multipart/form-data)
-- GET /api/files (returns a list of files)
-- GET /api/hello-world
+- `npm run dev`
 
-## Styling
+## Testing 
 
-You can use whatever you like. The boilerplate is using tailwindcss. If you want to use something else, feel free to add it.
+Run the testing suite in CI mode (headless)
+
+- `npm run test:ci`
+
+This will run both Unit and Integration test (Vitest and Cypress)
+
+### Testing Strategy
+
+- Mock Service Worker for intercepting network requests and mock Http Response
+- Vitest for unit testing of business logic, hooks, utilities, etc.
+- Cypress Component Testing for complex Component integration, Component Library (to ensure real DOM Environment)
+- [NOT IMPLEMENTED] Percy/Chromatic for Visual Regression Testing
+- [NOT IMPLEMENTED] Cypress/Playwright for E2E testing for FE/BE
