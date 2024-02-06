@@ -15,6 +15,9 @@ type BaseButtonProps = React.DetailedHTMLProps<
   disabled?: boolean;
 };
 
+/**
+ * This should use a `forwardRef` but due to the Storybook bug I want to keep a working example of the documentation.
+ */
 const BaseButton = ({
   children,
   variant = "primary",
