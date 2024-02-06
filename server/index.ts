@@ -26,13 +26,16 @@ app.use("/s3", express.static(S3_DIR));
 app.get("/api/ping", (_, res) => res.status(200).json({ success: true }));
 
 app.post("/api/upload", upload.single("file_upload"), function (_req, res) {
+  // if (Math.random() > 0.5) {
+  //   return res.status(500).end("Provoke FE error");
+  // }
   /**
    * In this function we would need to validate the file and save it to a distributed file system storage like S3.
    *
    * We need to store each image with an unique identifier and store the identifier in a database, and have that identifier pointing at the URL of the image in the distributed file system.
    */
   try {
-    return res.status(200).json({ message: "File uploaded successfully!" });
+    return res.status(200).json({ success: true });
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "An error occurred";

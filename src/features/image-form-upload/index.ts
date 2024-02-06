@@ -1,1 +1,1 @@
-export { default as ImageFormUpload } from "./components/image-form-upload.component";
+export { default as FileUploaderMVP } from "./components/image-form-upload.component";
