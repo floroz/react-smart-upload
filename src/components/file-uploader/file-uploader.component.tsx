@@ -1,32 +1,48 @@
+import { BaseButton } from "../base-button";
+import { FilePicker } from "../file-picker";
+import styles from "./file-uploader.module.css";
+
+type FileUploaderProps = {
+  loading?: boolean;
+  disabled?: boolean;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  files: File[];
+  errorMessage?: string;
+};
+
 /**
- * The design of this component will be influenced by:
- *
- * 1. UX Design requirements
- *  a) Design constraints vs Design flexibility
- *  b) User flow
- *  c) Accessibility requirements
- *  d) Drag and drop support
- *  e) File preview
- *  f) Error messages to the user
- *
- * 2. Backend requirements
- *  a) API contract
- *  b) File types and size
- *  c) File validation
- *  d) File compression
- *  e) File storage
- *  f) Parallel uploading
- *  g) Retry failed uploads
- *  h) Chunking
- *
- * 3. Engineering requirements:
- *  a) shared across teams?
- *  b) support different BE and services?
+ * FileUploader component agnostic from the file upload implementation.
  */
-const FileUploader = () => {
+const FileUploader = ({
+  handleFileChange,
+  handleSubmit,
+  loading,
+  files,
+  disabled,
+  errorMessage,
+}: FileUploaderProps) => {
   return (
-    <div>
-      <h1>Hello, React!</h1>
+    <div className={styles.uploader}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <FilePicker
+          files={files}
+          multiple
+          accept="image/*"
+          disabled={loading || disabled}
+          onFileChange={handleFileChange}
+        />
+        <BaseButton
+          disabled={loading || !files || files.length === 0}
+          type="submit"
+          variant="tertiary"
+        >
+          {loading ? "Uploading..." : "Upload"}
+        </BaseButton>
+      </form>
+      <div className={styles.error}>
+        {errorMessage && <p>{errorMessage}</p>}
+      </div>
     </div>
   );
 };

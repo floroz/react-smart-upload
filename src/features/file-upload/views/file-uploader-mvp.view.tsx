@@ -1,16 +1,35 @@
 import { useState } from "react";
 import { uploadFile } from "../../../api/upload/upload.api";
-import { BaseButton } from "../../../components/base-button";
-import { FilePicker } from "../../../components/file-picker";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { FileUploader } from "../../../components";
 
 /**
- * This component is an MVP to validate the correct integration of the FilePicker and our API/Services in the FE side.
+ * The design of this component will be influenced by:
  *
- * The <FileUploader /> coming from /components/ should be responsible for hiding and containing most of the logic used here, alongside providing advanced options and customisation based on the requirements specified in the Component's comments.
+ * 1. UX Design requirements
+ *  a) Design constraints vs Design flexibility
+ *  b) User flow
+ *  c) Accessibility requirements
+ *  d) Drag and drop support
+ *  e) File preview
+ *  f) Error messages to the user
+ *
+ * 2. Backend requirements
+ *  a) API contract
+ *  b) File types and size
+ *  c) File validation
+ *  d) File compression
+ *  e) File storage
+ *  f) Parallel uploading
+ *  g) Retry failed uploads
+ *  h) Chunking
+ *
+ * 3. Engineering requirements:
+ *  a) shared across teams?
+ *  b) support different BE and services?
  */
 const FileUploaderMVP = () => {
-  const [files, setFiles] = useState<File[] | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
 
   const queryClient = useQueryClient();
 
@@ -31,7 +50,7 @@ const FileUploaderMVP = () => {
       setFiles(filesArray);
     } else {
       console.warn("No files were selected");
-      setFiles(null);
+      setFiles([]);
     }
   };
 
@@ -61,36 +80,20 @@ const FileUploaderMVP = () => {
       queryClient.invalidateQueries({
         queryKey: ["files"],
       });
-      setFiles(null);
+      setFiles([]);
     } catch (err) {
       console.error("Error uploading files", err);
     }
   };
   return (
     <section className="w-full flex justify-center my-5">
-      <div className="flex flex-col gap-3">
-        <form onSubmit={handleSubmit} className="flex flex-row gap-2">
-          <div className="">
-            <FilePicker
-              files={files}
-              multiple
-              accept="image/*"
-              disabled={isPending}
-              onFileChange={handleFileChange}
-            />
-          </div>
-          <BaseButton
-            disabled={isPending || !files || files.length === 0}
-            type="submit"
-            variant="tertiary"
-          >
-            {isPending ? "Uploading..." : "Upload"}
-          </BaseButton>
-        </form>
-        <div className="min-h-8">
-          {error && <p className="text-red-500">{error.message}</p>}
-        </div>
-      </div>
+      <FileUploader
+        handleFileChange={handleFileChange}
+        handleSubmit={handleSubmit}
+        files={files}
+        loading={isPending}
+        errorMessage={error?.message}
+      />
     </section>
   );
 };

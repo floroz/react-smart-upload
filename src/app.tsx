@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ImageFormUpload } from "./features/image-form-upload";
+import { FileUploaderMVP } from "./features/file-upload";
 import { ImageViewer } from "./features/image-viewer";
 import { memo } from "react";
 
@@ -10,7 +10,7 @@ const queryClient = new QueryClient();
 const MemoApp = memo(() => {
   return (
     <>
-      <ImageFormUpload />
+      <FileUploaderMVP />
       <ImageViewer />
     </>
   );
