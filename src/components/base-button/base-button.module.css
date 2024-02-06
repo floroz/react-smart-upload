@@ -5,6 +5,7 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  column-gap: 0.5rem;
   /* 44px for accessibility on touch */
   min-width: 2.75rem;
 }
@@ -25,6 +26,11 @@
   background-color: transparent;
   border-color: transparent;
   color: var(--color-blue-500);
+}
+
+.fullWidth {
+  display: flex;
+  width: 100%;
 }
 
 .disabled {
@@ -49,3 +55,5 @@
     color: var(--color-white);
   }
 }
+
+/* TODO: Mobile Responsiveness */
