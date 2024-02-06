@@ -4,6 +4,11 @@ import { BaseButton } from "../../../components/base-button";
 import { FilePicker } from "../../../components/file-picker";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+/**
+ * This component is an MVP to validate the correct integration of the FilePicker and our API/Services in the FE side.
+ *
+ * The <FileUploader /> should be responsible for hiding and containing most of the logic used here, alongside providing advanced options and customisation based on the requirements specified in the Component's comments.
+ */
 const ImageFormUpload = () => {
   const [files, setFiles] = useState<File[] | null>(null);
 
@@ -53,8 +58,8 @@ const ImageFormUpload = () => {
     setFiles(null);
   };
   return (
-    <section className="">
-      <form onSubmit={handleSubmit}>
+    <section className="w-full flex justify-center my-5">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-y-2">
         <div className="">
           <FilePicker
             files={files}
@@ -63,7 +68,11 @@ const ImageFormUpload = () => {
             onFileChange={handleFileChange}
           />
         </div>
-        <BaseButton disabled={isPending} type="submit" variant="primary">
+        <BaseButton
+          disabled={isPending || !files || files.length === 0}
+          type="submit"
+          variant="tertiary"
+        >
           {isPending ? "Uploading..." : "Upload"}
         </BaseButton>
       </form>

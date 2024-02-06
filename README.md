@@ -5,11 +5,15 @@
 - Make sure you have Node >= 18
 - Install dependencies: `npm i`
 
-## Component Library
+## Component Library (Storybook)
 
 Start Storybook to review the Components:
 
 - `npm run storybook`
+
+### Documentation
+
+Storybook can be used to automatically generate previews of the availabile components, create an interactive playground, and use `react-codegen` to automatically generate API documentation from our types.
 
 ## Application (Frontend and Backend)
 
