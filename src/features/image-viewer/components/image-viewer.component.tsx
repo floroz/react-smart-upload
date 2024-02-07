@@ -8,7 +8,7 @@ const Error = ({ error }: { error: Error }) => (
   <div>Error: {error.message}</div>
 );
 
-const NoFiles = () => <div>No files found</div>;
+const NoImages = () => <div>No images found. Upload images to start.</div>;
 
 const FileImageList = ({ files }: { files: UploadedFileWithUrl[] }) => (
   <ul className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 max-w-4xl gap-2">
@@ -26,7 +26,13 @@ const FileImageList = ({ files }: { files: UploadedFileWithUrl[] }) => (
     ))}
   </ul>
 );
-
+/**
+ * Techniques to improve performances for large image galleries:
+ *
+ * 1. Pagination
+ * 2. Infinite Scrolling / Lazy loading below the fold (Intersection Observer)
+ * 3. low res low size Thumbnail loading first and then source image swapping upon loading
+ */
 const ImageViewer = () => {
   const {
     data: files,
@@ -48,7 +54,7 @@ const ImageViewer = () => {
         ) : files && files.length > 0 ? (
           <FileImageList files={files} />
         ) : (
-          <NoFiles />
+          <NoImages />
         )}
       </div>
     </div>

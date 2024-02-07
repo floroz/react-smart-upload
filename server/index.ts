@@ -15,7 +15,7 @@ export const app = express();
 
 const upload = mutler({ dest: "uploads/" });
 
-// in real environment we would block all origins and only allow FE domain based on the environment
+// in real environment we would block all origins and only whitelist FE domain based on the environment loaded (staging -> staging, production -> production)
 app.use(cors());
 
 app.use(express.json());
@@ -25,10 +25,10 @@ app.use("/s3", express.static(S3_DIR));
 
 app.get("/api/ping", (_, res) => res.status(200).json({ success: true }));
 
+/**
+ * In reality we might provide the end user with a pre-signed URL to upload the file directly to S3 with an expiration date of 5-10 minutes to avoid exposing AWS credentials on the FE.
+ */
 app.post("/api/upload", upload.single("file_upload"), function (_req, res) {
-  // if (Math.random() > 0.5) {
-  //   return res.status(500).end("Provoke FE error");
-  // }
   /**
    * In this function we would need to validate the file and save it to a distributed file system storage like S3.
    *

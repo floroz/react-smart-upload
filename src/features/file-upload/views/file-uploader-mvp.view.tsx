@@ -55,9 +55,9 @@ const FileUploaderMVP = () => {
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    resetError();
-
     event.preventDefault();
+
+    resetError();
 
     if (!files || files.length === 0) {
       return;

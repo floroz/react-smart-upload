@@ -11,11 +11,17 @@ type BaseButtonProps = {
   children: React.ReactNode;
   /**
    * The variant of the button
+   * @default "primary"
    */
-  variant: BaseButtonVariant;
+  variant?: BaseButtonVariant;
+  /**
+   * If true, the button will be disabled
+   * @default false
+   */
   disabled?: boolean;
   /**
    * Polymorphic prop to allow the button to be rendered as an anchor or a button
+   * @default "button"
    */
   as?: React.ElementType;
   leftIcon?: React.ReactNode;
@@ -45,9 +51,9 @@ const BaseButton = ({
 }: BaseButtonProps) => {
   return (
     <Component
+      aria-label={label}
       {...(Component === "button" ? { type: "button" } : {})}
       disabled={disabled}
-      {...domAttributes}
       className={clsx([styles.base, "with-focus"], {
         [styles.primary]: variant === "primary",
         [styles.secondary]: variant === "secondary",
@@ -55,7 +61,7 @@ const BaseButton = ({
         [styles.fullWidth]: fullWidth,
         [styles.disabled]: disabled,
       })}
-      aria-label={label}
+      {...domAttributes}
     >
       {leftIcon && <span className={styles.leftIcon}>{leftIcon}</span>}
       {children}

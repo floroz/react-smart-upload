@@ -5,31 +5,43 @@
 - Make sure you have Node >= 18
 - Install dependencies: `npm i`
 
-## Component Library (Storybook)
+## 1. Component Library (Storybook)
 
-Start Storybook to review the Components:
+Under `src/components` we are placing Components that would ideally belong to the Design System or Shared Component Library.
+
+Those components are data-agnostic and use CSS Modules/SCSS/PostCSS for their styling solution due to the highly dynamic nature of styles that they support.
+
+To view the Component Library, start Storybook:
 
 - `npm run storybook`
 
-### Documentation
+### Documentation for other teams
 
 Storybook can be used to automatically generate previews of the availabile components, create an interactive playground, and use `react-codegen` to automatically generate API documentation from our types.
 
-## Application (Frontend and Backend)
+## 2. Application (Frontend and Backend)
 
-Start the application:
+Start the application (both FE and BE):
 
 - `npm run dev`
 
-## Testing 
+### Overview
 
-Run the testing suite in CI mode (headless)
+The application is a SPA with a single page made of 2 views/template. A Form File Upload and an Image View Gallery.
+
+## 3. Testing Strategy
+
+Run all tests in CI mode (headless)
 
 - `npm run test:ci`
 
-This will run both Unit and Integration test (Vitest and Cypress)
+Run only unit tests:
 
-### Testing Strategy
+- `npm run test:unit`
+  
+Run only Cypress component
+
+- `npm run test:integ`
 
 - Mock Service Worker for intercepting network requests and mock Http Response
 - Vitest for unit testing of business logic, hooks, utilities, etc.

@@ -13,3 +13,26 @@
   min-height: 2rem;
   color: red;
 }
+
+.preview {
+  padding: 2.5rem 0.5rem;
+  height: 20rem;
+  width: 25rem;
+  overflow: auto;
+  border: 2px solid var(--color-blue-500);
+  color: var(--color-blue-500);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+}
+
+.previewFile {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.25rem;
+}
